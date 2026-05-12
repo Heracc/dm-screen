@@ -3,7 +3,7 @@ import pandas as pd
 import json
 
 bestiary_page = st.Page("bestiary.py", title="Bestiary")
-initiative_page = st.Page("initiative.py", title="Initative Tracker)
+initiative_page = st.Page("initiative.py", title="Initative Tracker")
 players_page = st.Page("players.py", title="Players")
 
 pg = st.navigation([bestiary_page, initative_page, players_page])
