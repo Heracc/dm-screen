@@ -24,6 +24,7 @@ with col1:
 
 with col3:
     is_valid(search)
+    test()
     #st.image()
 
 test()
