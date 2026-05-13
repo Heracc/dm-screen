@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import json
 
-bestiary_page = st.Page("bestiary.py", title="Bestiary")
-initiative_page = st.Page("initiative.py", title="Initative Tracker")
-players_page = st.Page("players.py", title="Players")
+initiative_page = st.Page("pages/01initiative.py", title="Initative Tracker")
+players_page = st.Page("pages/02players.py", title="Players")
+bestiary_page = st.Page("pages/03bestiary.py", title="Bestiary")
 
 pg = st.navigation([bestiary_page, initative_page, players_page])
 pg.run()
