@@ -19,7 +19,7 @@ search = st.text_input('search for a monster', value="Search here...").lower().s
 stat_header = st.container(border=True)
 stat_header.border=False
 if is_valid(search):
-    stat_header.header(monsters[search])
+    stat_header.header(monsters[search]['name'])
 else: stat_header.header(f"{search} is not a valid monster.")
 
 with col1:
