@@ -17,20 +17,14 @@ st.title("test page")
 search = st.text_input('search for a monster', value="Search here...").lower().strip()
 "---"
 stat_header = st.container(border=True)
-left, middle, right = stat_header.columns(3)
+left, right = stat_header.columns([4,1])
 
 if is_valid(search):
-    with stat_header:
+    with left:
         st.header(monsters[search]['name'], width="stretch")
+    with right:
         st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']}", text_alignment='right')
-else: stat_header.header(f"{search} is not a valid monster.")
+else: 
+    with stat_header:
+        st.header(f"{search} is not a valid monster.")
 
-
-with left:
-    pass
-with middle:
-    pass
-
-with right:
-    pass
-    #st.image()
