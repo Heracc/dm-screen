@@ -16,11 +16,11 @@ def is_valid(search):
 st.title("test page")
 
 search = st.text_input('search for a ').lower().strip()
-stat_header = st.container(border=True
-)
+stat_header = st.container(border=True)
+stat_header.border=False
 if is_valid(search):
     stat_header.header(monsters[search])
-else: st.write(f"{search} is not a valid monster.")
+else: stat_header.header(f"{search} is not a valid monster.")
 
 with col1:
     pass
