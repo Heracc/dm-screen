@@ -23,7 +23,9 @@ if is_valid(search):
     with left:
         st.header(monsters[search]['name'], width="stretch")
         type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
-        st.write(type_alignment)
+        st.write(type_alignment.title())
+        "---"
+        st.image(monsters[search]['imageUrl'], width=400)
     with right:
         st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
 else: 
