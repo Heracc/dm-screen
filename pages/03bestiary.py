@@ -25,7 +25,7 @@ if is_valid(search):
         type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
         st.write(type_alignment.title())
         "---"
-        st.image(monsters[search]['imageUrl'])
+    stat_header.image(monsters[search]['imageUrl'])
     with right:
         st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
 else: 
