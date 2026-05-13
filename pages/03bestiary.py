@@ -10,8 +10,8 @@ def test():
 
 def is_valid(search):
     if search in monsters:
-        return True
         st.write("test")
+        return True
     else: return False
 
 st.title("test page")
