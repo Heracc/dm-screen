@@ -1,36 +1,32 @@
 import streamlit as st
 import json
 
+col1, col2, col3 = st.columns(3)
+
 with open('data/monsters.json','r') as file:
     global monsters
     monsters = json.load(file)
 
-def test():
-    st.write("this is a test")
-
 def is_valid(search):
     if search in monsters:
-        st.write("test")
         return True
-    else: return False
+    else: 
+        return False
 
 st.title("test page")
 
 search = st.text_input('search for a ').lower().strip()
+stat_header = st.container(border=True
+)
+if is_valid(search):
+    stat_header.header(monsters[search])
+else: st.write(f"{search} is not a valid monster.")
 
-col1, col2, col3 = st.columns(3)
 with col1:
-    test()
-
+    pass
 with col2:
-    if search in monsters:
-        st.write("found")
-        #st.dataframe(monsters[search])
-    else: st.write(f"{search} is not a valid!")
+    pass
 
 with col3:
-    is_valid(search)
-    test()
+    pass
     #st.image()
-
-test()
