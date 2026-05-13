@@ -1,7 +1,6 @@
 import streamlit as st
 import json
 
-col1, col2, col3 = st.columns(3)
 
 with open('data/monsters.json','r') as file:
     global monsters
@@ -16,11 +15,17 @@ def is_valid(search):
 st.title("test page")
 
 search = st.text_input('search for a monster', value="Search here...").lower().strip()
+"---"
 stat_header = st.container(border=True)
-stat_header.border=False
+left, middle, right = stat_header.columns(3)
+
 if is_valid(search):
-    stat_header.header(monsters[search]['name'])
+    with stat_header:
+        st.header(monsters[search]['name'])
+        st.space('stretch')
+        st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']}")
 else: stat_header.header(f"{search} is not a valid monster.")
+
 
 with col1:
     pass
