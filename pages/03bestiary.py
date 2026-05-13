@@ -22,14 +22,15 @@ col1, col2, col3 = st.columns(3)
 with col1:
     test()
 
+with col2:
+    if search in monsters:
+        st.write("found")
+        #st.dataframe(monsters[search])
+    else: st.write(f"{search} is not a valid!")
+
 with col3:
     is_valid(search)
     test()
     #st.image()
 
 test()
-
-if search in monsters:
-    st.write("found")
-    #st.dataframe(monsters[search])
-else: st.write(f"{search} is not a valid!")
