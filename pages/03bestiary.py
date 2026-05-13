@@ -30,5 +30,6 @@ with col3:
 test()
 
 if search in monsters:
-    st.dataframe(monsters[search])
+    st.write("found")
+    #st.dataframe(monsters[search])
 else: st.write(f"{search} is not a valid!")
