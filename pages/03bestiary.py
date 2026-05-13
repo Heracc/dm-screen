@@ -23,7 +23,7 @@ if is_valid(search):
     with left:
         st.header(monsters[search]['name'], width="stretch")
     with right:
-        st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']}", text_alignment='right')
+        st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']}")
 else: 
     with stat_header:
         st.header(f"{search} is not a valid monster.")
