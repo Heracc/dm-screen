@@ -21,7 +21,7 @@ left, right = stat_header.columns([3,1])
 
 if is_valid(search):
     with left:
-        st.header(monsters[search]['name'], width="stretch")
+        st.markdown(f"<h1 style='margin-top: 0px; margin-bottom: 5px;'>{monsters[search]['name']}</h1>", unsafe_allow_html=True)
     with right:
         st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']}")
 else: 
