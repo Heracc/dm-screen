@@ -27,11 +27,11 @@ if is_valid(search):
 else: stat_header.header(f"{search} is not a valid monster.")
 
 
-with col1:
+with left:
     pass
-with col2:
+with middle:
     pass
 
-with col3:
+with right:
     pass
     #st.image()
