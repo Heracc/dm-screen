@@ -5,24 +5,29 @@ with open('data/monsters.json','r') as file:
     global monsters
     monsters = json.load(file)
 
+def test():
+    st.write("this is a test")
+
 def is_valid(search):
     if search in monsters:
         return True
         st.write("test")
     else: return False
 
-st.title("bestiary")
+st.title("test page")
 
-search = st.text_input('search for a monster').lower().strip()
+search = st.text_input('search for a ').lower().strip()
 
 col1, col2, col3 = st.columns(3)
 with col1:
-    is_valid(search)
+    test()
 
 with col3:
     is_valid(search)
     #st.image()
 
+test()
+
 if search in monsters:
     st.dataframe(monsters[search])
-else: st.write(f"{search} is not a valid monster!")
+else: st.write(f"{search} is not a valid!")
