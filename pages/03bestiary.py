@@ -16,7 +16,7 @@ st.title("test page")
 
 search = st.text_input('search for a monster', value="Search here...").lower().strip()
 "---"
-stat_header = st.container(border=True, horizontal=True)
+stat_header = st.container(border=True)
 left, middle, right = stat_header.columns(3)
 
 if is_valid(search):
