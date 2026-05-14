@@ -27,11 +27,11 @@ if is_valid(search):
         type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
         st.write(type_alignment.title())
         st.write(f"HP: {hp}")
-    stat_header.write("---")
-    with st.expander("Image"):
-        stat_header.image(monsters[search]['imageUrl'])
-    stat_header.write("---")
     with stat_header:
+        "---"
+        with st.expander("Image"):
+            st.image(monsters[search]['imageUrl'])
+        "---"
         with st.expander("Stats"):
             st.write(f"HP: {hp}")
             st.write(f"AC: {ac}")
