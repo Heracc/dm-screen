@@ -31,11 +31,11 @@ if is_valid(search):
         "---"
         with st.expander("Image"):
             st.image(monsters[search]['imageUrl'])
-        with st.expander("Stats"):
+        with st.expander("Stats", expanded=True):
             st.write(f"HP: {hp}")
             st.write(f"AC: {ac}")
             st.write(f"Initiative: {monsters[search]['modifiers']['dex']}")
-            st.write(" ")
+            " "
             for speed_type, value in monsters[search]['speed'].items():
                 if speed_type != "hover":
                     if value is not 0:
@@ -45,6 +45,7 @@ if is_valid(search):
                             st.write(f"{speed_type.title()}: {value} ft.")
                 else: st.write(f"Hover: {str(value).title()}")
     with right:
+        " "
         st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
         st.write(f"AC: {ac}")
         
