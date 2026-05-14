@@ -20,14 +20,31 @@ stat_header = st.container(border=True)
 left, right = stat_header.columns([3,1])
 
 if is_valid(search):
+    hp = f"{monsters[search]['maxHitPoints']} ({monsters[search]['hitDice']})"
+    ac = monsters[search]['ac']
     with left:
         st.header(monsters[search]['name'], width="stretch")
         type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
         st.write(type_alignment.title())
-        "---"
-    stat_header.image(monsters[search]['imageUrl'])
+        st.write(f"HP: {hp}")
+    "---"
+    with st.expander("Image"):
+        stat_header.image(monsters[search]['imageUrl'])
+    "---"
+    with st.expander("Stats"):
+        st.write(f"HP: {hp}")
     with right:
-        st.markdown(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
+        st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
+        st.write(f"AC: {ac}")
+        st.write(f"AC: {ac}")
+        st.write(f"Initiative: {monsters[search]['modifiers']['dex']}")
+        st.write(" ")
+        for speed_type, value in monsters[search]['speed'].items():
+            if speed_type is not "hover":
+                if value is not 0:
+                    st.write(f"{speed_type.title()}: {value} ft.")
+            else: st.write(f"Hover: {value.title()}")
+
 else: 
     with stat_header:
         st.header(f"{search} is not a valid monster.")
