@@ -43,7 +43,7 @@ if is_valid(search):
                             pass
                         else:
                             st.write(f"{speed_type.title()}: {value} ft.")
-                else: st.write(f"Hover: {str(value.title())}")
+                else: st.write(f"Hover: {str(value).title()}")
     with right:
         st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
         st.write(f"AC: {ac}")
