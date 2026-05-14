@@ -1,7 +1,10 @@
 import streamlit as st
 st.title("initiative")
 
-with st.container(horizontal=True, horizontal_alignment="distribute"):
+left, right = st.columns([2,1])
+with left:
     st.text_input("add a monster or player", label_visibility="hidden", placeholder="Add a monster or player")
 
+with right:
+    st.space()
     st.button("Add Combatant")
