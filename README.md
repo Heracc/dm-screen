@@ -17,3 +17,8 @@ A simple Streamlit app template for you to modify!
    ```
    $ streamlit run streamlit_app.py
    ```
+
+### to do:
+* make initiative
+* make monster names in the initiative board clickable and use st.page_link and st.query_parameters that sets the seach in the bestiary page to that monster
+* make it so that theres a button on the bestiary page to add the monster to initiative

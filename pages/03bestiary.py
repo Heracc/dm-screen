@@ -14,7 +14,7 @@ def is_valid(search):
 
 st.title("test page")
 
-search = st.text_input('search for a monster', value="Search here...").lower().strip()
+search = st.text_input('search for a monster', value="Search", placeholder="Search for a monster", label_visibility="hidden").lower().strip()
 "---"
 stat_header = st.container(border=True)
 left, right = stat_header.columns([3,1])

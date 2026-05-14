@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import json
 
+if "encounter" not in st.session_state:
+    st.session_state.encounter = []
+
 initiative_page = st.Page("pages/01initiative.py", title="Initative Tracker")
 players_page = st.Page("pages/02players.py", title="Players")
 bestiary_page = st.Page("pages/03bestiary.py", title="Bestiary")
