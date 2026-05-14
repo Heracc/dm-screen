@@ -31,7 +31,6 @@ if is_valid(search):
         "---"
         with st.expander("Image"):
             st.image(monsters[search]['imageUrl'])
-        "---"
         with st.expander("Stats"):
             st.write(f"HP: {hp}")
             st.write(f"AC: {ac}")
@@ -44,7 +43,7 @@ if is_valid(search):
                             pass
                         else:
                             st.write(f"{speed_type.title()}: {value} ft.")
-                else: st.write(f"Hover: {value.title()}")
+                else: st.write(f"Hover: {str(value.title())}")
     with right:
         st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
         st.write(f"AC: {ac}")
