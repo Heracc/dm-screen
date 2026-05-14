@@ -33,16 +33,15 @@ if is_valid(search):
     stat_header.write("---")
     with stat_header:
         with st.expander("Stats"):
-            with left:
-                st.write(f"HP: {hp}")
-                st.write(f"AC: {ac}")
-                st.write(f"Initiative: {monsters[search]['modifiers']['dex']}")
-                st.write(" ")
-                for speed_type, value in monsters[search]['speed'].items():
-                    if speed_type is not "hover":
-                        if value is not 0:
-                            st.write(f"{speed_type.title()}: {value} ft.")
-                    else: st.write(f"Hover: {value.title()}")
+            st.write(f"HP: {hp}")
+            st.write(f"AC: {ac}")
+            st.write(f"Initiative: {monsters[search]['modifiers']['dex']}")
+            st.write(" ")
+            for speed_type, value in monsters[search]['speed'].items():
+                if speed_type is not "hover":
+                    if value is not 0:
+                        st.write(f"{speed_type.title()}: {value} ft.")
+                else: st.write(f"Hover: {value.title()}")
     with right:
         st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
         st.write(f"AC: {ac}")
