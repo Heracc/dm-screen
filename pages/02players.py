@@ -18,7 +18,7 @@ with st.expander("Add a Player"):
         st.text_input("Race", placeholder="Race", label_visibility="hidden", key="race_input")
         st.selectbox("Class", all_classes, placeholder="Class", label_visibility="hidden", index=None, accept_new_options=True, key="class_input")
         st.text_input("Subclass", placeholder="Subclass", label_visibility="hidden", key="subclass_input")
-        st.text_input("Background", placeholder="Background", label_visibility="hidden", key="subclass_input")
+        st.text_input("Background", placeholder="Background", label_visibility="hidden", key="background_input")
         st.space()
         st.number_input("Armor Class", placeholder="Armor Class", label_visibility="hidden", value=None, step=0, key="ac_input")
         st.number_input("HP Max", placeholder="HP Max", label_visibility="hidden", value=None, step=0, key="hp_max")
