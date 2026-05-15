@@ -63,6 +63,7 @@ def form_callback():
 
     }
     st.write(st.session_state.players)
+    st.write(st.session_state.players["fred"]["languages"])
 
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
