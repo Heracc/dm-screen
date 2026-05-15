@@ -11,11 +11,3 @@ bestiary_page = st.Page("pages/03bestiary.py", title="Bestiary")
 
 pg = st.navigation([initiative_page, players_page, bestiary_page])
 pg.run()
-
-#with open('monsters.json','r') as m:
-#    global monsters
-#    monsters = json.load(m)
-#st.write(monsters['aboleth']['languages'][0])
-#st.write(monsters['aboleth'])
-#st.title("test")
-
