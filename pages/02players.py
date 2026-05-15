@@ -1,6 +1,7 @@
 import streamlit as st
 import json
-all_classes = ["Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
+all_classes = [
+    "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
 if "players" not in st.session_state:
     st.session_state.players = {}
 st.title("players")
@@ -31,4 +32,6 @@ with st.expander("Add a Player"):
             st.number_input("INT", placeholder="INT", min_value=0, step=1, width=200, key="int_input")
             st.number_input("WIS", placeholder="WIS", min_value=0, step=1, width=200, key="wis_input")
             st.number_input("CHA", placeholder="CHA", min_value=0, step=1, width=200, key="cha_input")
+        st.markdown("###### Languages")
+        
         st.form_submit_button('Add Character', on_click=form_callback)
