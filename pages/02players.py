@@ -60,7 +60,6 @@ def form_callback():
             "wis": st.session_state.wis_input,
             "cha": st.session_state.cha_input,
         }
-
     }
     st.write(st.session_state.players)
     st.write(st.session_state.players["fred"]["languages"])
