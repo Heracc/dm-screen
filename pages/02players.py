@@ -23,5 +23,5 @@ with st.expander("Add a Player"):
         st.number_input("Armor Class", placeholder="Armor Class", label_visibility="hidden", min_value=0, step=1, key="ac_input")
         st.number_input("HP Max", placeholder="HP Max", label_visibility="hidden", min_value=0, step=1, key="hp_max")
         st.number_input("Speed", placeholder="Speed", label_visibility="hidden", min_value=0, step=1, key="speed_input")
-        st.markdown("<h6> Ability Scores </h6>")
+        st.markdown("###### Ability Scores")
         st.form_submit_button('Add Character', on_click=form_callback)
