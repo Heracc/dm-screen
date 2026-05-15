@@ -14,5 +14,5 @@ def form_callback():
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
         st.text_input("Character Name", placeholder="Character Name", label_visibility="hidden", key="name_input")
-        st.text_input("Armor Class", placeholder="Armor Class", label_visibility="hidden", key="ac_input")
+        st.number_input("Armor Class", placeholder="Armor Class", label_visibility="hidden", key="ac_input")
         st.form_submit_button('Add Character', on_click=form_callback)
