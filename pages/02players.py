@@ -41,7 +41,7 @@ def form_callback():
         "class": st.session_state.class_input,
         "subclass": st.session_state.subclass_input,
         "background": st.session_state.background_input,
-        "languages": st.session_state.languages_input,
+        "languages": st.session_state.language_input,
         "maxHitPoints": st.session_state.hp_input,
         "speed": st.session_state.speed_input,
         "modifiers": {
