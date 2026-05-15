@@ -2,6 +2,31 @@ import streamlit as st
 import json
 all_classes = [
     "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
+all_languages = [
+    # Standard Languages
+    "Common", 
+    "Dwarvish", 
+    "Elvish", 
+    "Giant", 
+    "Gnomish", 
+    "Goblin", 
+    "Halfling", 
+    "Orc",
+    
+    # Exotic/Rare Languages
+    "Abyssal", 
+    "Celestial", 
+    "Deep Speech", 
+    "Draconic", 
+    "Infernal", 
+    "Primordial", 
+    "Sylvan", 
+    "Undercommon",
+    
+    # Secret Languages
+    "Druidic", 
+    "Thieves' Cant"
+]
 if "players" not in st.session_state:
     st.session_state.players = {}
 st.title("players")
@@ -15,11 +40,11 @@ def form_callback():
 
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
-        st.text_input("Character Name", placeholder="Character Name", label_visibility="hidden", key="name_input")
-        st.text_input("Race", placeholder="Race", label_visibility="hidden", key="race_input")
-        st.selectbox("Class", all_classes, placeholder="Class", label_visibility="hidden", index=None, accept_new_options=True, key="class_input")
-        st.text_input("Subclass", placeholder="Subclass", label_visibility="hidden", key="subclass_input")
-        st.text_input("Background", placeholder="Background", label_visibility="hidden", key="background_input")
+        st.text_input("Character Name", placeholder="Character Name", key="name_input")
+        st.text_input("Race", placeholder="Race", key="race_input")
+        st.selectbox("Class", all_classes, placeholder="Class", index=None, accept_new_options=True, key="class_input")
+        st.text_input("Subclass", placeholder="Subclass", key="subclass_input")
+        st.text_input("Background", placeholder="Background", key="background_input")
         st.space()
         st.number_input("Armor Class", placeholder="Armor Class", min_value=0, step=1, key="ac_input")
         st.number_input("HP Max", placeholder="HP Max", min_value=0, step=1, key="hp_max")
@@ -33,5 +58,5 @@ with st.expander("Add a Player"):
             st.number_input("WIS", placeholder="WIS", min_value=0, step=1, width=200, key="wis_input")
             st.number_input("CHA", placeholder="CHA", min_value=0, step=1, width=200, key="cha_input")
         st.markdown("###### Languages")
-        
+        st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=form_callback)
