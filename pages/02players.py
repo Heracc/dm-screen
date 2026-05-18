@@ -1,5 +1,8 @@
 import streamlit as st
 import json
+from st_supabase_connection import SupabaseConnection
+conn = st.connection("supabase",type=SupabaseConnection)
+
 all_classes = [
     "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
 all_languages = [
@@ -27,10 +30,14 @@ all_languages = [
     "Druidic", 
     "Thieves' Cant"
 ]
+
 if "players" not in st.session_state:
     st.session_state.players = {}
+    
 st.title("players")
 st.write("data frame will go here, i promise")
+
+
 def mod_calc(score):
     return (score-10)//2
 

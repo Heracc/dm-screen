@@ -1,6 +1,5 @@
 import streamlit as st
-import pandas as pd
-import json
+
 
 if "encounter" not in st.session_state:
     st.session_state.encounter = []

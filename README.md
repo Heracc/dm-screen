@@ -26,9 +26,12 @@ A simple Streamlit app template for you to modify!
 for class character data storage
 ```
 class Char:
-ac ect (initialize as empty or use typing)
-def __init__(dict):
-    for (var in locals()) {
-        var.value = dict[var.key]
-    }
+def __init__(self, dict):
+    self.dict = dict 
+    self.ac ect
+    self.hp: int
+    
+    self.ac = dict[ac]
+    for (key in dict):
+        locals()[key] = dict[key]
 ```
