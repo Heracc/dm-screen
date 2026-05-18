@@ -24,10 +24,11 @@ A simple Streamlit app template for you to modify!
 * make it so that theres a button on the bestiary page to add the monster to initiative
 
 for class character data storage
-
+```
 class Char:
 ac ect (initialize as empty or use typing)
-def __nit__(dict):
+def __init__(dict):
     for (var in locals()) {
         var.value = dict[var.key]
     }
+```
