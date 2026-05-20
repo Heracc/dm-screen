@@ -100,7 +100,7 @@ testPlayer = {
     "ac": 155
 }
 if st.button("save"):
-    supabase.table("players").insert({
+    sb.table("players").insert({
         "name": testPlayer["name"],
         "data": testPlayer
     }).execute()
