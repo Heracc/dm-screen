@@ -94,5 +94,7 @@ testPlayer = {
 if st.button("save"):
     sb.table("players").insert({
         "name": testPlayer["name"],
-        "data": testPlayer
+        "class": testPlayer["class"],
+        "hp": testPlayer["hp"],
+        "ac": testPlayer["ac"]
     }).execute()
