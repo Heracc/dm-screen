@@ -1,7 +1,6 @@
 import streamlit as st
 import json
-from st_supabase_connection import SupabaseConnection
-conn = st.connection("supabase",type=SupabaseConnection)
+
 
 all_classes = [
     "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
