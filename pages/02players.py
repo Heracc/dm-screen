@@ -1,6 +1,24 @@
 import streamlit as st
 from supabase_client import supabase as sb
 import json
+from decouple import config
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+
+username = config("DB_USER")
+password = config("DB_PASSWORD")
+name = config("DB_NAME")
+port = config("DB_PORT")
+host = config("DB_HOST")
+
+engine = create_engine(
+    f"postgresql+psycopg://{username}:password@{host}:{port}/{name}?password={password}",
+    echo=True,
+    pool_size=10,
+)
+
+with Session(engine) as session:
+    st.write(session)  # <sqlalchemy.orm.session.Session object at 0x107292510>
 
 all_classes = [
     "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
