@@ -50,14 +50,6 @@ def form_callback():
         "languages": st.session_state.language_input,
         "maxHitPoints": st.session_state.hp_input,
         "speed": st.session_state.speed_input,
-        "modifiers": {
-            "str": mod_calc(st.session_state.strength_input),
-            "dex": mod_calc(st.session_state.dex_input),
-            "con": mod_calc(st.session_state.con_input),
-            "int": mod_calc(st.session_state.int_input),
-            "wis": mod_calc(st.session_state.wis_input),
-            "cha": mod_calc(st.session_state.cha_input),
-        },
         "stats": {
             "str": st.session_state.strength_input,
             "dex": st.session_state.dex_input,
@@ -68,7 +60,7 @@ def form_callback():
         }
     }
     st.write(st.session_state.players)
-    st.write(st.session_state.players["fred"]["languages"])
+    
 
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
