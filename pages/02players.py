@@ -1,7 +1,6 @@
 import streamlit as st
 import json
 
-
 all_classes = [
     "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
 all_languages = [
@@ -92,3 +91,15 @@ with st.expander("Add a Player"):
         st.markdown("###### Languages")
         st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=form_callback)
+
+testPlayer = {
+    "name": "guh",
+    "class": "wizard",
+    "hp": 12345,
+    "ac": 155
+}
+if st.button("save"):
+    supabase.table("players").insert({
+        "name": testPlayer["name"],
+        "data": testPlayer
+    }).execute()
