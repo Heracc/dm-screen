@@ -2,4 +2,4 @@ streamlit
 supabase
 python-decouple
 sqlalchemy
-psycopg
+psycopg[binary]
