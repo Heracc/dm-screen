@@ -21,6 +21,7 @@ class Players(Base):
     __tablename__ = "players"
 
     id = Column(Uuid, primary_key=True, default=uuid.uuid4)
+    user_id = Column(Uuid)
     name = Column(Text, nullable=False)
     _class = Column(Text, nullable=False)
     hp = Column(Integer, nullable=False)
