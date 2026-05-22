@@ -13,7 +13,6 @@ def sign_up():
             "data": {"username": st.session_state.su_username_input}
         }
     })
-    st.write(f"heres the user id: {response.user.id}")
     st.session_state.user = response.user.id
 
 def sign_in():
