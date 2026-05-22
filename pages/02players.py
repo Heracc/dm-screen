@@ -110,7 +110,7 @@ with st.expander("Add a Player"):
         st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=form_callback)
 try:
-    with engine.connect() as connection:
+    with Session(engine) as connection:
         st.write("Connection successful!")
 except Exception as e:
     st.write(f"Failed to connect: {e}")
