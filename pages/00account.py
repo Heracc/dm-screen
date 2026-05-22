@@ -25,7 +25,6 @@ def sign_in():
         st.session_state.user = response.user.id
     except Exception as e:
         st.write(f"Login failed: {e}")
-        st.rerun()
 
 def sign_out():
     supabase.auth.sign_out()
