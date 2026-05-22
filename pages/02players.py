@@ -124,6 +124,11 @@ testPlayer = {
 
 if st.button("save"):
     with Session(engine) as session:
-        test = Players(name=testPlayer['name'], _class=testPlayer['class'], hp=testPlayer['hp'], ac=testPlayer['ac'])
+        test = Players(user_id=testPlayer["user_id"], name=testPlayer['name'], _class=testPlayer['class'], hp=testPlayer['hp'], ac=testPlayer['ac'])
         session.add(test)
         session.commit()
+
+if st.button("retrieve"):
+    with Session(engine) as session:
+        retrieved = session.query(Player).filter(Player.user_id == st.session_state.user_id).all()
+        st.write(retrieved)
