@@ -27,12 +27,6 @@ class Players(Base):
 
 engine = create_engine(DATABASE_URL, poolclass=NullPool)
 
-engine = create_engine(
-    f"postgresql+psycopg://{username}:password@{host}:{port}/{name}?password={password}",
-    echo=True,
-    pool_size=10,
-)
-
 all_classes = [
     "Artificer","Barbarian","Bard","Cleric","Druid","Fighter","Monk","Paladin","Ranger","Rogue","Sorcerer","Warlock","Wizard"]
 all_languages = [
@@ -114,13 +108,18 @@ with st.expander("Add a Player"):
         st.markdown("###### Languages")
         st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=form_callback)
-
+try:
+    with engine.connect() as connection:
+        st.write("Connection successful!")
+except Exception as e:
+    st.write(f"Failed to connect: {e}")
 testPlayer = {
     "name": "guh",
     "class": "wizard",
     "hp": 12345,
     "ac": 155
 }
+
 if st.button("save"):
     with Session(engine) as session:
         test = Players(name=testPlayer['name'], _class=testPlayer['class'], hp=testPlayer['hp'], ac=testPlayer['ac'])
