@@ -135,5 +135,5 @@ if st.button("save"):
 
 if st.button("retrieve"):
     with Session(engine) as session:
-        retrieved = session.query(Player).filter(Player.user_id == st.session_state.user).all()
+        retrieved = session.query(Players).filter(Players.user_id == st.session_state.user).all()
         st.write(retrieved)

@@ -39,7 +39,7 @@ if st.session_state.user == None:
         st.form_submit_button("Sign Up", on_click=sign_up)
     with st.form("sign_in"):
         st.write("Sign In")
-        st.text_input("Email", key="si_username_input")
+        st.text_input("Username", key="si_username_input")
         st.text_input("Password; minimum 6 characters", type="password", key="si_password_input")
         st.form_submit_button("Sign In", on_click=sign_in)
 else:
