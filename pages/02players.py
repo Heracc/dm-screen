@@ -5,12 +5,13 @@ import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid
 from sqlalchemy.orm import Session, DeclarativeBase
 
-username = config("DB_USER")
-password = config("DB_PASSWORD")
-name = config("DB_NAME")
-port = config("DB_PORT")
-host = config("DB_HOST")
+USER = config("DB_USER")
+PASSWORD = config("DB_PASSWORD")
+DBNAME = config("DB_NAME")
+PORT = config("DB_PORT")
+HOST = config("DB_HOST")
 
+DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
 
 class Base(DeclarativeBase):
     pass
@@ -23,6 +24,8 @@ class Players(Base):
     _class = Column(Text, nullable=False)
     hp = Column(Integer, nullable=False)
     ac = Column(Integer)
+
+engine = create_engine(DATABASE_URL, poolclass=NullPool)
 
 engine = create_engine(
     f"postgresql+psycopg://{username}:password@{host}:{port}/{name}?password={password}",
