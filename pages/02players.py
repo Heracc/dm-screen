@@ -56,6 +56,10 @@ all_languages = [
     "Thieves' Cant"
 ]
 
+if st.session_state.user == None:
+    st.write("You need to sign in to access this page. Go to the profile page using the sidebar.")
+    st.stop()
+
 if "players" not in st.session_state:
     st.session_state.players = {}
     
@@ -130,5 +134,5 @@ if st.button("save"):
 
 if st.button("retrieve"):
     with Session(engine) as session:
-        retrieved = session.query(Player).filter(Player.user_id == st.session_state.user_id).all()
+        retrieved = session.query(Player).filter(Player.user_id == st.session_state.user).all()
         st.write(retrieved)

@@ -1,9 +1,6 @@
 import streamlit as st
 from supabase_client import supabase
 
-if "user" not in st.session_state:
-    st.session_state.user = None
-
 def sign_up():
     response = supabase.auth.sign_up(
     {
