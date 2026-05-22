@@ -10,8 +10,8 @@ def sign_up():
         "email": st.session_state.su_email_input,
         "password": st.session_state.su_password_input
     })
-    st.write(f"heres the user id: {response[id]}")
-    st.session_state.user = response[id]
+    st.write(f"heres the user id: {response.user.id}")
+    st.session_state.user = response.user.id
 
 def sign_in():
     response = supabase.auth.sign_in_with_password(
@@ -19,7 +19,7 @@ def sign_in():
         "email": st.session_state.si_email_input,
         "password": st.session_state.si_password_input
     })
-    st.session_state.user = response[id]
+    st.session_state.user = response.user.id
 
 def sign_out():
     supabase.auth.sign_out()
