@@ -4,6 +4,7 @@ from decouple import config
 import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid
 from sqlalchemy.orm import Session, DeclarativeBase
+from sqlalchemy.pool import NullPool
 
 USER = config("DB_USER")
 PASSWORD = config("DB_PASSWORD")
