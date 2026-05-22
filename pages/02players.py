@@ -115,6 +115,7 @@ try:
 except Exception as e:
     st.write(f"Failed to connect: {e}")
 testPlayer = {
+    "user_id": st.session_state.user,
     "name": "guh",
     "class": "wizard",
     "hp": 12345,
