@@ -13,16 +13,19 @@ def sign_up():
     st.session_state.user = response.user.id
 
 def sign_in():
-
-    response = supabase.auth.sign_in_with_password(
-    {
-        "email": f"{st.session_state.si_username_input}@dmscreen.internal",
-        "password": st.session_state.si_password_input,
-        "options": {
-            "data": {"username": st.session_state.si_username_input}
-        }
-    })
-    st.session_state.user = response.user.id
+    try:
+        response = supabase.auth.sign_in_with_password(
+        {
+            "email": f"{st.session_state.si_username_input}@dmscreen.internal",
+            "password": st.session_state.si_password_input,
+            "options": {
+                "data": {"username": st.session_state.si_username_input}
+            }
+        })
+        st.session_state.user = response.user.id
+    except Exception as e:
+        st.write(f"Login failed: {e}")
+        st.rerun()
 
 def sign_out():
     supabase.auth.sign_out()
