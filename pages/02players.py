@@ -149,7 +149,7 @@ if st.button("save"):
 if st.button("retrieve"):
     with Session(engine) as session:
         retrieved = session.query(Players).filter(Players.user_id == st.session_state.user).all()
-        df = pd.DataFrame(retrieved.data)
+        df = pd.DataFrame(retrieved)
         df.set_index("id", inplace=True)
         transposed_df = df.T
         st.dataframe(transposed_df)
