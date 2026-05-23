@@ -29,7 +29,7 @@ class Players(Base):
     _class = Column(Text, nullable=False)
     subclass = Column(Text, nullable=False)
     background = Column(Text, nullable=False)
-    languages = Column(ARRAY(string))
+    languages = Column(ARRAY(String))
     hp = Column(Integer, nullable=False)
     ac = Column(Integer, default=0)
     speed = Column(Integer, default=0)
