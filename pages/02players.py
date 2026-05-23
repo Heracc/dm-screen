@@ -1,9 +1,11 @@
 import streamlit as st
+import pandas as pd
 from supabase_client import supabase as sb
 from decouple import config
 import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid
 from sqlalchemy.orm import Session, DeclarativeBase
+from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.pool import NullPool
 
 USER = config("DB_USER")
@@ -23,9 +25,20 @@ class Players(Base):
     id = Column(Uuid, primary_key=True, default=uuid.uuid4)
     user_id = Column(Uuid)
     name = Column(Text, nullable=False)
+    race = Column(Text, nullable=False)
     _class = Column(Text, nullable=False)
+    subclass = Column(Text, nullable=False)
+    background = Column(Text, nullable=False)
+    languages = Column(ARRAY(string))
     hp = Column(Integer, nullable=False)
-    ac = Column(Integer)
+    ac = Column(Integer, default=0)
+    speed = Column(Integer, default=0)
+    str = Column(Integer, default=3)
+    dex = Column(Integer, default=3)
+    con = Column(Integer, default=3)
+    int = Column(Integer, default=3)
+    wis = Column(Integer, default=3)
+    cha = Column(Integer, default=3)
 
 engine = create_engine(DATABASE_URL, poolclass=NullPool)
 
@@ -136,4 +149,7 @@ if st.button("save"):
 if st.button("retrieve"):
     with Session(engine) as session:
         retrieved = session.query(Players).filter(Players.user_id == st.session_state.user).all()
-        st.write(retrieved)
+        df = pd.DataFrame(response.data)
+        df.set_index("id", inplace=True)
+        transposed_df = df.T
+        st.write(transposed_df)
