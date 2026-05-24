@@ -7,7 +7,7 @@ from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON
 from sqlalchemy.orm import Session, DeclarativeBase
 ## AI told me to import this for the list column bc i need to do mutable list to make sure 
 ## sqlalchemy can handle list changes
-from sqlalchemy.ext.mutable import MutableList
+#from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.pool import NullPool
 
 USER = config("DB_USER")
@@ -32,7 +32,7 @@ class Players(Base):
     subclass = Column(Text, default="")
     background = Column(Text, default="")
     ## AI told me how to make this a list stored in the column
-    languages = Column(MutableList.as_mutable(JSON))
+    languages = Column(JSON)
     hp = Column(Integer, default=0)
     ac = Column(Integer, default=0)
     speed = Column(Integer, default=0)
@@ -155,6 +155,8 @@ if st.button("retrieve"):
         df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user).statement, session.connection())
         df.drop(columns=['id', 'user_id'], inplace=True)
         df.set_index("name", inplace=True)
+        df.rename(columns={'_class': 'Class'}, inplace=True)
+        df.columns = df.columns.str.title()
         transposed_df = df.T
         st.dataframe(df)
         st.dataframe(transposed_df)
