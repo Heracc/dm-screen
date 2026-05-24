@@ -3,9 +3,9 @@ import pandas as pd
 from supabase_client import supabase as sb
 from decouple import config
 import uuid
-from sqlalchemy import create_engine, Column, Integer, Text, Uuid
+from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON
 from sqlalchemy.orm import Session, DeclarativeBase
-from sqlalchemy.dialects.postgresql import ARRAY
+from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.pool import NullPool
 
 USER = config("DB_USER")
@@ -29,7 +29,8 @@ class Players(Base):
     _class = Column(Text, default="")
     subclass = Column(Text, default="")
     background = Column(Text, default="")
-    languages = Column(ARRAY(Text))
+    ## AI told me how to make this a list stored in the column
+    languages = Column(Column(MutableList.as_mutable(JSON))
     hp = Column(Integer, default=0)
     ac = Column(Integer, default=0)
     speed = Column(Integer, default=0)
