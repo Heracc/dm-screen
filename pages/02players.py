@@ -154,6 +154,7 @@ if st.button("retrieve"):
     with Session(engine) as session:
         df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user).statement, session.connection())
         df.drop(columns=['id', 'user_id'], inplace=True)
+        df.set_index("name", inplace=True)
         transposed_df = df.T
         st.dataframe(df)
         st.dataframe(transposed_df)
