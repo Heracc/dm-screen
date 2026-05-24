@@ -24,13 +24,13 @@ class Players(Base):
 
     id = Column(Uuid, primary_key=True, default=uuid.uuid4)
     user_id = Column(Uuid)
-    name = Column(Text)
-    race = Column(Text)
-    _class = Column(Text)
-    subclass = Column(Text)
-    background = Column(Text)
+    name = Column(Text, default="")
+    race = Column(Text, default="")
+    _class = Column(Text, default="")
+    subclass = Column(Text, default="")
+    background = Column(Text, default="")
     languages = Column(ARRAY(Text))
-    hp = Column(Integer)
+    hp = Column(Integer, default=0)
     ac = Column(Integer, default=0)
     speed = Column(Integer, default=0)
     str = Column(Integer, default=3)
@@ -136,9 +136,9 @@ testPlayer = {
     "user_id": st.session_state.user,
     "name": "guh",
     "class": "wizard",
+    "languages": ["english", "american", "hacker", "binary"],
     "hp": 12345,
-    "ac": 155,
-    "languages": ["english", "american", "hacker", "binary"]
+    "ac": 155
 }
 
 if st.button("save"):
