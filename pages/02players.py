@@ -155,5 +155,5 @@ if st.button("retrieve"):
         df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user).statement, session.connection())
         df.drop(columns=['id', 'user_id'], inplace=True)
         transposed_df = df.T
-        st.datafram(df)
+        st.dataframe(df)
         st.dataframe(transposed_df)
