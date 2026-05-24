@@ -30,7 +30,7 @@ class Players(Base):
     subclass = Column(Text, default="")
     background = Column(Text, default="")
     ## AI told me how to make this a list stored in the column
-    languages = Column(Column(MutableList.as_mutable(JSON))
+    languages = Column(Column(MutableList.as_mutable(JSON)))
     hp = Column(Integer, default=0)
     ac = Column(Integer, default=0)
     speed = Column(Integer, default=0)
