@@ -152,4 +152,4 @@ if st.button("retrieve"):
         df = pd.DataFrame(retrieved)
         #df.set_index("id", inplace=True)
         #transposed_df = df.T
-        st.dataframe(transposed_df)
+        st.dataframe(df)
