@@ -31,8 +31,7 @@ class Players(Base):
     _class = Column(Text, default="")
     subclass = Column(Text, default="")
     background = Column(Text, default="")
-    ## AI told me how to make this a list stored in the column
-    languages = Column(JSON)
+    level = Column(Integer, default=1)
     hp = Column(Integer, default=0)
     ac = Column(Integer, default=0)
     speed = Column(Integer, default=0)
@@ -42,6 +41,9 @@ class Players(Base):
     int = Column(Integer, default=3)
     wis = Column(Integer, default=3)
     cha = Column(Integer, default=3)
+    ## AI told me how to make this a list stored in the column
+    languages = Column(JSON)
+
 
 engine = create_engine(DATABASE_URL, poolclass=NullPool)
 
@@ -87,27 +89,48 @@ st.write("data frame will go here, i promise")
 def mod_calc(score):
     return (score-10)//2
 
+def new():
+    with Session(engine) as session:
+        new_player = Players(
+            user_id=player_input["user_id"], 
+            name=player_input['name'], 
+            race=player_input['race'],
+            _class=player_input['class'],
+            subclass=player_input['subclass'],
+            background=player_input['background'],
+            languages=player_input['all_languages'],
+            hp=player_input['hp'], 
+            ac=player_input['ac'],
+            speed=player_input['speed'],
+            str=player_input['str'],
+            dex=player_input['dex'],
+            con=player_input['con'],
+            int=player_input['int'],
+            wis=player_input['wis'],
+            cha=player_input['cha']
+            )
+        session.add(new_player)
+        session.commit()
+
 def form_callback():
-    st.session_state.players[st.session_state.name_input] = {
+    player_input = {
+        "user_id": st.session_state.user,
         "ac": st.session_state.ac_input,
         "race": st.session_state.race_input,
         "class": st.session_state.class_input,
         "subclass": st.session_state.subclass_input,
         "background": st.session_state.background_input,
         "languages": st.session_state.language_input,
-        "maxHitPoints": st.session_state.hp_input,
+        "hp": st.session_state.hp_input,
         "speed": st.session_state.speed_input,
-        "stats": {
-            "str": st.session_state.strength_input,
-            "dex": st.session_state.dex_input,
-            "con": st.session_state.con_input,
-            "int": st.session_state.int_input,
-            "wis": st.session_state.wis_input,
-            "cha": st.session_state.cha_input,
-        }
+        "str": st.session_state.strength_input,
+        "dex": st.session_state.dex_input,
+        "con": st.session_state.con_input,
+        "int": st.session_state.int_input,
+        "wis": st.session_state.wis_input,
+        "cha": st.session_state.cha_input,
     }
-    st.write(st.session_state.players)
-    
+    st.write(st.session_state)
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
         st.text_input("Character Name", placeholder="Character Name", key="name_input")
