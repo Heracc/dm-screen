@@ -41,6 +41,12 @@ class Players(Base):
     int = Column(Integer, default=3)
     wis = Column(Integer, default=3)
     cha = Column(Integer, default=3)
+    str_mod = Column(Integer)
+    dex_mod = Column(Integer)
+    con_mod = Column(Integer)
+    int_mod = Column(Integer)
+    wis_mod = Column(Integer)
+    cha_mod = Column(Integer)
     ## AI told me how to make this a list stored in the column
     languages = Column(JSON)
 
@@ -89,7 +95,24 @@ st.write("data frame will go here, i promise")
 def mod_calc(score):
     return (score-10)//2
 
-def new():
+def form_callback():
+    player_input = {
+        "user_id": st.session_state.user,
+        "ac": st.session_state.ac_input,
+        "race": st.session_state.race_input,
+        "class": st.session_state.class_input,
+        "subclass": st.session_state.subclass_input,
+        "background": st.session_state.background_input,
+        "languages": st.session_state.language_input,
+        "hp": st.session_state.hp_input,
+        "speed": st.session_state.speed_input,
+        "str": st.session_state.strength_input,
+        "dex": st.session_state.dex_input,
+        "con": st.session_state.con_input,
+        "int": st.session_state.int_input,
+        "wis": st.session_state.wis_input,
+        "cha": st.session_state.cha_input,
+    }
     with Session(engine) as session:
         new_player = Players(
             user_id=player_input["user_id"], 
@@ -112,25 +135,7 @@ def new():
         session.add(new_player)
         session.commit()
 
-def form_callback():
-    player_input = {
-        "user_id": st.session_state.user,
-        "ac": st.session_state.ac_input,
-        "race": st.session_state.race_input,
-        "class": st.session_state.class_input,
-        "subclass": st.session_state.subclass_input,
-        "background": st.session_state.background_input,
-        "languages": st.session_state.language_input,
-        "hp": st.session_state.hp_input,
-        "speed": st.session_state.speed_input,
-        "str": st.session_state.strength_input,
-        "dex": st.session_state.dex_input,
-        "con": st.session_state.con_input,
-        "int": st.session_state.int_input,
-        "wis": st.session_state.wis_input,
-        "cha": st.session_state.cha_input,
-    }
-    st.write(st.session_state)
+
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
         st.text_input("Character Name", placeholder="Character Name", key="name_input")
@@ -153,6 +158,7 @@ with st.expander("Add a Player"):
         st.markdown("###### Languages")
         st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=form_callback)
+
 try:
     with Session(engine) as connection:
         st.write("Connection successful!")
