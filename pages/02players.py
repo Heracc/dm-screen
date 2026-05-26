@@ -183,10 +183,10 @@ if st.button("retrieve"):
     with Session(engine) as session:
         df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user).statement, session.connection())
         df.drop(columns=['id', 'user_id'], inplace=True)
-        df.set_index("name", inplace=True)
         #AI told me how to use the pandas rename
         df.rename(columns={'_class': 'Class'}, inplace=True)
         df.columns = df.columns.str.title()
+        df.set_index("Name", inplace=True)
         # AI told me how to replace _ with spaces
         df.columns = df.columns.str.replace('_', ' ')
         df.columns.values[5:7] = df.columns[5:7].str.upper()
