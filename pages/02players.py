@@ -164,20 +164,6 @@ try:
         st.write("Connection successful!")
 except Exception as e:
     st.write(f"Failed to connect: {e}")
-testPlayer = {
-    "user_id": st.session_state.user,
-    "name": "guh",
-    "class": "wizard",
-    "languages": ["english", "american", "hacker", "binary"],
-    "hp": 12345,
-    "ac": 155
-}
-
-if st.button("save"):
-    with Session(engine) as session:
-        test = Players(user_id=testPlayer["user_id"], name=testPlayer['name'], _class=testPlayer['class'], hp=testPlayer['hp'], ac=testPlayer['ac'])
-        session.add(test)
-        session.commit()
 
 if st.button("retrieve"):
     with Session(engine) as session:
