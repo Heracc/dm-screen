@@ -187,7 +187,7 @@ if st.button("retrieve"):
         df.rename(columns={'_class': 'Class'}, inplace=True)
         df.columns = df.columns.str.title()
         # AI told me how to replace _ with spaces
-        df.columns = df.columns.str.replace('_', ' ', inplace=True)
+        df.columns = df.columns.str.replace('_', ' ')
         transposed_df = df.T
         st.dataframe(df)
         st.dataframe(transposed_df)
