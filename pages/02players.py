@@ -189,8 +189,8 @@ if st.button("retrieve"):
         df.columns = df.columns.str.title()
         # AI told me how to replace _ with spaces
         df.columns = df.columns.str.replace('_', ' ')
-        df.columns[6:8]= df.columns[6:8].str.upper()
-        df.columns[9:21] = df.columns[9:21].str.upper()
+        df.columns = df.columns[6:8].str.upper()
+        df.columns = df.columns[9:21].str.upper()
         df.columns = df.columns.str.replace('MOD', 'Modifier')
         transposed_df = df.T
         st.dataframe(df)
