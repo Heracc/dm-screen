@@ -3,7 +3,7 @@ import pandas as pd
 from supabase_client import supabase as sb
 from decouple import config
 import uuid
-from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON
+from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON, Computed
 from sqlalchemy.orm import Session, DeclarativeBase
 ## AI told me to import this for the list column bc i need to do mutable list to make sure 
 ## sqlalchemy can handle list changes
@@ -17,6 +17,9 @@ PORT = config("DB_PORT")
 HOST = config("DB_HOST")
 
 DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
+
+def mod_calc(score):
+    return (score-10)//2
 
 class Base(DeclarativeBase):
     pass
@@ -41,7 +44,12 @@ class Players(Base):
     int = Column(Integer, default=3)
     wis = Column(Integer, default=3)
     cha = Column(Integer, default=3)
-    
+    str_mod = Column(Integer, Computed(mod_calc(str), persisted=True))
+    dex_mod = Column(Integer, Computed(mod_calc(dex), persisted=True))
+    con_mod = Column(Integer, Computed(mod_calc(con), persisted=True))
+    int_mod = Column(Integer, Computed(mod_calc(wis), persisted=True))
+    wis_mod = Column(Integer, Computed(mod_calc(int), persisted=True))
+    cha_mod = Column(Integer, Computed(mod_calc(cha), persisted=True))
     ## AI told me how to make this a list stored in the column
     languages = Column(JSON)
 
@@ -85,10 +93,6 @@ if "players" not in st.session_state:
     
 st.title("players")
 st.write("data frame will go here, i promise")
-
-
-def mod_calc(score):
-    return (score-10)//2
 
 def form_callback():
     player_input = {
