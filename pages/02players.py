@@ -98,6 +98,7 @@ def mod_calc(score):
 def form_callback():
     player_input = {
         "user_id": st.session_state.user,
+        "name": st.session_state.name_input,
         "ac": st.session_state.ac_input,
         "race": st.session_state.race_input,
         "class": st.session_state.class_input,
