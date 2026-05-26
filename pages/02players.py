@@ -122,7 +122,7 @@ def form_callback():
             _class=player_input['class'],
             subclass=player_input['subclass'],
             background=player_input['background'],
-            languages=player_input['all_languages'],
+            languages=player_input['languages'],
             hp=player_input['hp'], 
             ac=player_input['ac'],
             speed=player_input['speed'],
