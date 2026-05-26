@@ -41,12 +41,7 @@ class Players(Base):
     int = Column(Integer, default=3)
     wis = Column(Integer, default=3)
     cha = Column(Integer, default=3)
-    str_mod = Column(Integer)
-    dex_mod = Column(Integer)
-    con_mod = Column(Integer)
-    int_mod = Column(Integer)
-    wis_mod = Column(Integer)
-    cha_mod = Column(Integer)
+    
     ## AI told me how to make this a list stored in the column
     languages = Column(JSON)
 
