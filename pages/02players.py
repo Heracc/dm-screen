@@ -5,9 +5,6 @@ from decouple import config
 import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON, Computed
 from sqlalchemy.orm import Session, DeclarativeBase
-## AI told me to import this for the list column bc i need to do mutable list to make sure 
-## sqlalchemy can handle list changes
-#from sqlalchemy.ext.mutable import MutableList
 from sqlalchemy.pool import NullPool
 
 USER = config("DB_USER")
@@ -94,7 +91,14 @@ if "players" not in st.session_state:
 st.title("players")
 st.write("data frame will go here, i promise")
 
-def form_callback():
+try:
+    with Session(engine) as connection:
+        st.write("Connection successful!")
+except Exception as e:
+    st.write(f"Failed to connect: {e} \n Stopping app.")
+    st.stop()
+
+def add_player():
     player_input = {
         "user_id": st.session_state.user,
         "name": st.session_state.name_input,
@@ -157,13 +161,7 @@ with st.expander("Add a Player"):
             st.number_input("CHA", placeholder="CHA", min_value=3, max_value=30, step=1, width=200, key="cha_input")
         st.markdown("###### Languages")
         st.multiselect("Select Languages:", all_languages, key="language_input")
-        st.form_submit_button('Add Character', on_click=form_callback)
-
-try:
-    with Session(engine) as connection:
-        st.write("Connection successful!")
-except Exception as e:
-    st.write(f"Failed to connect: {e}")
+        st.form_submit_button('Add Character', on_click=add_player)
 
 if st.button("retrieve"):
     with Session(engine) as session:
@@ -181,3 +179,12 @@ if st.button("retrieve"):
         transposed_df = df.T
         st.dataframe(df)
         st.dataframe(transposed_df)
+
+to_delete = st.text_input("Delete a player", placeholder="Type name here...")
+
+if st.button("Delete"):
+    conf = st.text_input(f"Type delete to delete {to_delete}")
+    if conf == "delete":
+        with Session(engine) as session:
+            pass
+            #session.delete goes here
