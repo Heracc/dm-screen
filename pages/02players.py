@@ -178,7 +178,8 @@ if st.button("retrieve"):
         df.columns = df.columns.str.replace('MOD', 'Modifier')
         transposed_df = df.T
         st.dataframe(df)
-        st.dataframe(transposed_df)
+    st.dataframe(transposed_df)
+
 
 to_delete = st.text_input("Delete a player", placeholder="Type name here...")
 
