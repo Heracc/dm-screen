@@ -187,5 +187,5 @@ if st.button("Delete"):
     conf = st.text_input(f"Type delete to delete {to_delete}")
     if conf == "delete":
         with Session(engine) as session:
-            pass
-            #session.delete goes here
+            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == to_delete).all())
+            session.commit()
