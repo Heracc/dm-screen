@@ -181,11 +181,11 @@ if st.button("retrieve"):
     st.dataframe(transposed_df)
 
 
-to_delete = st.text_input("Delete a player", placeholder="Type name here...")
+st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
 
 if st.button("Delete"):
-    conf = st.text_input(f"Type delete to delete {to_delete}")
-    if conf == "delete":
+    st.text_input(f"Type delete to delete {st.session_state.to_delete}", key="confirmation")
+    if st.session_state.confirmation == "delete":
         st.toast("deleted")
         with Session(engine) as session:
             st.toast("in the session")
