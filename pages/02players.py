@@ -186,6 +186,8 @@ to_delete = st.text_input("Delete a player", placeholder="Type name here...")
 if st.button("Delete"):
     conf = st.text_input(f"Type delete to delete {to_delete}")
     if conf == "delete":
+        st.toast("deleted")
         with Session(engine) as session:
+            st.toast("in the session")
             session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == to_delete).all())
             session.commit()
