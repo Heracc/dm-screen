@@ -2,14 +2,17 @@ import streamlit as st
 from supabase_client import supabase
 
 def sign_up():
-    response = supabase.auth.sign_up(
-    {
-        "email": f"{st.session_state.su_username_input}@dmscreen.internal",
-        "password": st.session_state.su_password_input,
-        "options": {
-            "data": {"username": st.session_state.su_username_input}
-        }
-    })
+    try:
+        response = supabase.auth.sign_up(
+        {
+            "email": f"{st.session_state.su_username_input}@dmscreen.internal",
+            "password": st.session_state.su_password_input,
+            "options": {
+                "data": {"username": st.session_state.su_username_input}
+            }
+        })
+    except Exception as e:
+        st.error(f"Sign up failed: {e}")
     st.session_state.user = response.user.id
 
 def sign_in():
@@ -24,7 +27,7 @@ def sign_in():
         })
         st.session_state.user = response.user.id
     except Exception as e:
-        st.write(f"Login failed: {e}")
+        st.error(f"Sign in failed: {e}")
 
 def sign_out():
     supabase.auth.sign_out()
