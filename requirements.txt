@@ -1,1 +1,5 @@
 streamlit
+supabase
+python-decouple
+sqlalchemy
+psycopg2-binary

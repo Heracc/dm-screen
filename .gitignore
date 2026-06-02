@@ -1,4 +1,6 @@
 .streamlit/secrets.toml
+SUPABASE_URL = "https://jzlxebmktwwpzpmkhsld.supabase.co"
+SUPABASE_KEY = "sb_publishable_uKdhPdZ8Acb3LHRTelez8Q_KyMuPJ42"
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
