@@ -9,7 +9,7 @@ if "user" not in st.session_state:
     st.session_state.user = None
 
 if st.session_state.user == None:
-    pg = st.navigation([account_page, initiative_page, bestiary_page])
+    pg = st.navigation([account_page, initiative_page, creatures_page])
 elif st.session_state.user == "cbaee7e9-cbd4-4624-b013-af943fd21702":
     creatures_page = st.Page("pages/03creatures.py", title="bestiality (for goonmaster45's eyes only)")
     pg = st.navigation([account_page, initiative_page, players_page, creatures_page])
