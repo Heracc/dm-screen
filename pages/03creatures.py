@@ -12,9 +12,9 @@ def is_valid(search):
     else: 
         return False
 
-st.title("test page")
+st.title("Creature Lookup")
 
-search = st.text_input('Search for a monster', placeholder="Search for a monster", label_visibility="hidden").lower().strip()
+search = st.text_input('Search for a creature', placeholder="Search for a monster", label_visibility="hidden").lower().strip()
 "---"
 stat_header = st.container(border=True)
 left, right = stat_header.columns([3,1])
