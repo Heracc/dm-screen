@@ -188,16 +188,8 @@ with st.form("deleter"):
     
     if submit and confirm:
         with Session(engine) as session:
-            st.toast("in the session")
-            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == st.session_state.to_delete).all())
+            st.toast(f"Player {st.session_state.to_delete} deleted!")
+            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == st.session_state.to_delete).first())
             session.commit()
         
 
-if st.button("Delete"):
-    st.text_input(f"Type delete to delete {st.session_state.to_delete}", key="confirmation")
-    if st.session_state.confirmation == "delete":
-        st.toast("deleted")
-        with Session(engine) as session:
-            st.toast("in the session")
-            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == st.session_state.to_delete).all())
-            session.commit()
