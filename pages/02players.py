@@ -181,7 +181,7 @@ if st.button("retrieve"):
     st.dataframe(transposed_df)
 
 #AI gave an explantion of how to make the submit button grayed out if the checkbox isnt checked
-with st.form("deleter"):   
+with st.form("deleter", clear_on_submit=True):   
     st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
     confirm = st.checkbox("Are you sure?")
     submit = st.form_submit_button("Delete Player")
