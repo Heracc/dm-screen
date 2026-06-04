@@ -184,9 +184,9 @@ if st.button("retrieve"):
 with st.form("deleter"):   
     st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
     confirm = st.checkbox("Are you sure?")
-    submit = st.form_submit_button("Delete Player", disabled= not confirm)
+    submit = st.form_submit_button("Delete Player")
     
-    if confirm:
+    if submit and confirm:
         st.toast("deleted")
         
 
@@ -196,5 +196,5 @@ if st.button("Delete"):
         st.toast("deleted")
         with Session(engine) as session:
             st.toast("in the session")
-            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == to_delete).all())
+            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == st.session_state.to_delete).all())
             session.commit()
