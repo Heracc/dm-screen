@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from supabase_client import supabase as sb
+# from supabase_client import supabase as sb
 from decouple import config
 import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON, Computed
@@ -165,6 +165,8 @@ with st.expander("Add a Player"):
 
 if st.button("retrieve"):
     with Session(engine) as session:
+        # AI helped me write the syntax for this line of code. It creates a pandas dataframe object from the SQL result that is returned when you query the players table 
+        # using the Supabase
         df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user).statement, session.connection())
         df.drop(columns=['id', 'user_id'], inplace=True)
         #AI told me how to use the pandas rename
@@ -180,7 +182,7 @@ if st.button("retrieve"):
         st.dataframe(df)
     st.dataframe(transposed_df)
 
-#AI gave an explantion of how to make the submit button grayed out if the checkbox isnt checked
+
 with st.form("deleter", clear_on_submit=True):   
     st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
     confirm = st.checkbox("Are you sure?")
@@ -189,6 +191,7 @@ with st.form("deleter", clear_on_submit=True):
     if submit and confirm:
         with Session(engine) as session:
             st.toast(f"Player {st.session_state.to_delete} deleted!")
+
             session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == st.session_state.to_delete).first())
             session.commit()
         
