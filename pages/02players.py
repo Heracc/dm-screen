@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-# from supabase_client import supabase as sb
 from decouple import config
 import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON, Computed
