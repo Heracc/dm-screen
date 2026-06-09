@@ -6,11 +6,21 @@ This program uses the Streamlit library to create an interactive webapp with use
 
 # Concept Application: 
 This month, I learned about external libraries and their implementation. I also delved into SQL databases and how to interact with them within a Python program. I applied these skills in my program by using the Streamlit library, which provides lots of elements that help build websites. These are implemented by calling different methods such as st.write() to display text on the page or st.text_input() to display an interactive text box for users to input text. Additionally, I used the SQLAlchemy ORM (an ORM is an Object Relational Mapper and allows for the interaction with SQL from a Python script using OOP code rather than having to write raw SQL queries) library to edit an SQL database hosted on a service called Supabase. I also implemented more of my knowledge of classes that I learned from the last task, albeit in a very different way than I was used to: the ORM allowed me to use classes to represent player stat 'sheets'.
+   ## Streamlit Explanation:
+   guh
+   ## SQLAlchemy and Supabase Explanation:
+   gup
 
 # Development Process: 
-<What challenges or bugs did you encounter in your program? How did you address these issues?>
+The biggest issue I had while writing this program was figuring out how to connect to and interact with the Supabase SQL database using the SQLAlchemy session maker. I had to use Google AI Overview extensively here, as the Supabase official documentation didn't have any instructions for connecting with an ORM like SQLAlchemy. Once the AI got me started though, I was able to go forward on my own. After that, I did struggle with the ORM syntax for interacting with the SQL database, but I was able to figure out with a combination of help from Cooper, Gemini AI, and the SQLAlchemy docs.
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dmscreen0.streamlit.app/)
+# AI Disclosure:
+I used AI to help me with the SQL queries. I had to look up a lot of things to do with the ORM querying, and sometimes the best answer I could find was from the AI Overview. The two main sections where I used AI was in the retrieval and deletal of the player sheets. There was some other AI used for the formatting of the pandas dataframe used to display the player sheets, but only for two lines where I didn't know how to use the pandas library fully.
+
+---
+# Useful Things
+
+[![Open Website](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://dmscreen0.streamlit.app/)
 
 ### How to run it on your own machine
 
