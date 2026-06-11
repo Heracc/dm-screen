@@ -37,7 +37,42 @@ This month, I learned about external libraries and their implementation. I also 
    Statefulness allows you to have variables that will exist on all pages and won't be reset when the app is rerun.
 
 ## SQLAlchemy and Supabase Explanation:
-   gup
+   SQLAlchemy is a library that allows you to interact with SQL databases using OOP-style programming.
+   First you define the table as a class:
+
+   ```py
+   class Base(DeclarativeBase): 
+      # DeclarativeBase is a class imported from SQLAlchemy that enables classes to map to SQL tables. The Base class inherits from it but is otherwise empty so it can be used as a shorthand for DeclarativeBase in the future.  
+      pass
+
+   class Players(Base):
+      __tablename__ = "players" # This is the name of the table you want to link to in the SQL database
+
+      id = Column(Uuid, primary_key=True, default=uuid.uuid4) # Each one of these should match the name and type of a column in the table in the database
+      user_id = Column(Uuid)
+      name = Column(Text, default="")
+      race = Column(Text, default="")
+      hp = Column(Integer, default=0)
+   ```
+   Then you can add things to the database by instantiating objects of that class and adding them using the session:
+
+   ```py
+   player = Players(name="Nikhil", race="Gnome", hp=20)
+
+   with Session(engine) as session:
+      # The session acts as a staging ground for changes and performs all "conversations" with the database
+      session.add(player1) 
+      session.commit() # Writes the changes
+   ```
+
+   The database can now be queried:
+
+   ```py
+   with Session(engine) as session:
+      session.query(Players).filter(Players.name == "Nikhil").all()
+   ```
+   
+   The above code queries the Players database (`session.query(Players)`) and filters by the name attribute (`.filter(Players.name == "Nikhil")`), then returns all matching results (`.all()`)
 
 # Development Process: 
 The biggest issue I had while writing this program was figuring out how to connect to and interact with the Supabase SQL database using the SQLAlchemy session maker. I had to use Google AI Overview extensively here, as the Supabase official documentation didn't have any instructions for connecting with an ORM like SQLAlchemy. Once the AI got me started though, I was able to go forward on my own. After that, I did struggle with the ORM syntax for interacting with the SQL database, but I was able to figure out with a combination of help from Cooper, Gemini AI, and the SQLAlchemy docs.
