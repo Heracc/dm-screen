@@ -19,8 +19,22 @@ This month, I learned about external libraries and their implementation. I also 
    ```
    st.session_state.greeting = "Hello World!"
    ```
-   
-   This allows you to have variables that will exist on all pages and won't be reset when the app is rerun.
+
+   You can then use this like a variable:
+
+   ```
+   print(st.session_state.greeting)
+   ```
+
+   or
+
+   ```
+   print(st.session_state['greeting'])
+   ```
+
+   will both output 'Hello World!' to the console.
+
+   Statefulness allows you to have variables that will exist on all pages and won't be reset when the app is rerun.
 
 ## SQLAlchemy and Supabase Explanation:
    gup
