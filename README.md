@@ -9,9 +9,17 @@ This month, I learned about external libraries and their implementation. I also 
    
 ## Streamlit Explanation:
    Streamlit is a library that allows you to create websites using elements to build the website modularly. There are elements for everything from text input to dropdown selects to maps, and you can combine these in any way you want to build a site. The library handles the UI design for you (you still have to position the elements where you want them), so you can focus on the actual content of the website. Each page is one Python file that reruns from top to bottom everytime the user interacts with an element (except in an st.form, those don't rerun the page until they're submitted), so to save variables between reruns, you need to use what Streamlit calls "statefulness". You can store things in st.session_state using either dictionary-like syntax:
-      st.session_state['greeting'] = "Hello World!"
+
+   ```
+   st.session_state['greeting'] = "Hello World!"
+   ```
+
    or attribute based syntax:
-      st.session_state.greeting = "Hello World!"
+
+   ```
+   st.session_state.greeting = "Hello World!"
+   ```
+   
    This allows you to have variables that will exist on all pages and won't be reset when the app is rerun.
 
 ## SQLAlchemy and Supabase Explanation:
