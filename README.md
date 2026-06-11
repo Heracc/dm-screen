@@ -42,13 +42,19 @@ This month, I learned about external libraries and their implementation. I also 
 
    ```py
    class Base(DeclarativeBase): 
-      # DeclarativeBase is a class imported from SQLAlchemy that enables classes to map to SQL tables. The Base class inherits from it but is otherwise empty so it can be used as a shorthand for DeclarativeBase in the future.  
+      # DeclarativeBase is a class imported from SQLAlchemy that enables classes to 
+      # map to SQL tables. The Base class inherits from it but is otherwise empty 
+      # so it can be used as a shorthand for DeclarativeBase in the future.  
       pass
 
    class Players(Base):
-      __tablename__ = "players" # This is the name of the table you want to link to in the SQL database
+      __tablename__ = "players" 
+      # /\ This is the name of the table you want to link 
+      # to in the SQL database
 
-      id = Column(Uuid, primary_key=True, default=uuid.uuid4) # Each one of these should match the name and type of a column in the table in the database
+      # Each one of these attributes should match 
+      # the name and type of a column in the table in the database
+      id = Column(Uuid, primary_key=True, default=uuid.uuid4)
       user_id = Column(Uuid)
       name = Column(Text, default="")
       race = Column(Text, default="")
@@ -60,9 +66,10 @@ This month, I learned about external libraries and their implementation. I also 
    player = Players(name="Nikhil", race="Gnome", hp=20)
 
    with Session(engine) as session:
-      # The session acts as a staging ground for changes and performs all "conversations" with the database
+      # The session acts as a staging ground for changes and 
+      # performs all "conversations" with the database
       session.add(player1) 
-      session.commit() # Writes the changes
+      session.commit() # Writes the changes to the database
    ```
 
    The database can now be queried:
