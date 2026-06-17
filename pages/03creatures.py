@@ -33,8 +33,8 @@ def display_result():
             
         with stat_header:
             type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
-            st.write(type_alignment.title())
-            st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
+            st.subheader(type_alignment.title())
+            st.subheader(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
             "---"
             with st.expander("Image"):
                 st.image(monsters[search]['imageUrl'])
