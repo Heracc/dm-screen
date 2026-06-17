@@ -56,7 +56,6 @@ with searchbox:
         index=None,
         placeholder="Search for a creature", 
         label_visibility="hidden",
-        on_change = display_result(),
-        args = input
+        on_change = display_result(input),
     )
 
