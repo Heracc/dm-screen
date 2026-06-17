@@ -1,7 +1,6 @@
 import streamlit as st
 import json
 
-
 with open('data/monsters.json','r') as file:
     global monsters
     monsters = json.load(file)
@@ -14,12 +13,13 @@ def is_valid(search):
 
 st.title("Creature Lookup")
 
-search = st.text_input('Search for a creature', placeholder="Search for a monster", label_visibility="hidden").lower().strip()
+searchbox = st.container()
+
 "---"
 stat_header = st.container(border=True)
 left, right = stat_header.columns([3,1])
 
-if is_valid(search):
+def display_result(search):
     hp = f"{monsters[search]['maxHitPoints']} ({monsters[search]['hitDice']})"
     ac = monsters[search]['ac']
     with left:
@@ -48,9 +48,15 @@ if is_valid(search):
         " "
         st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
         st.write(f"AC: {ac}")
-        
 
-else: 
-    with stat_header:
-        st.header(f"{search} is not a valid monster.")
+with searchbox:
+    input = st.selectbox(
+        'Search for a creature',
+        monsters.keys(), 
+        index=None,
+        placeholder="Search for a creature", 
+        label_visibility="hidden",
+        on_change = display_result(),
+        args = input
+    )
 
