@@ -19,43 +19,46 @@ searchbox = st.container()
 stat_header = st.container(border=True)
 left, right = stat_header.columns([3,1])
 
-def display_result(search):
-    hp = f"{monsters[search]['maxHitPoints']} ({monsters[search]['hitDice']})"
-    ac = monsters[search]['ac']
-    with left:
-        st.header(monsters[search]['name'], width="stretch")
-        type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
-        st.write(type_alignment.title())
-        st.write(f"HP: {hp}")
-    with stat_header:
-        "---"
-        with st.expander("Image"):
-            st.image(monsters[search]['imageUrl'])
-        with st.expander("Stats", expanded=True):
+def display_result():
+    search = st.session_state.creature_search
+    if is_valid(search):
+        hp = f"{monsters[search]['maxHitPoints']} ({monsters[search]['hitDice']})"
+        ac = monsters[search]['ac']
+        with left:
+            st.header(monsters[search]['name'], width="stretch")
+            type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
+            st.write(type_alignment.title())
             st.write(f"HP: {hp}")
-            st.write(f"AC: {ac}")
-            st.write(f"Initiative: {monsters[search]['modifiers']['dex']}")
+        with stat_header:
+            "---"
+            with st.expander("Image"):
+                st.image(monsters[search]['imageUrl'])
+            with st.expander("Stats", expanded=True):
+                st.write(f"HP: {hp}")
+                st.write(f"AC: {ac}")
+                st.write(f"Initiative: {monsters[search]['modifiers']['dex']}")
+                " "
+                for speed_type, value in monsters[search]['speed'].items():
+                    if speed_type != "hover":
+                        if value is not 0:
+                            if speed_type == "hover":
+                                pass
+                            else:
+                                st.write(f"{speed_type.title()}: {value} ft.")
+                    else: st.write(f"Hover: {str(value).title()}")
+        with right:
             " "
-            for speed_type, value in monsters[search]['speed'].items():
-                if speed_type != "hover":
-                    if value is not 0:
-                        if speed_type == "hover":
-                            pass
-                        else:
-                            st.write(f"{speed_type.title()}: {value} ft.")
-                else: st.write(f"Hover: {str(value).title()}")
-    with right:
-        " "
-        st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
-        st.write(f"AC: {ac}")
+            st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
+            st.write(f"AC: {ac}")
 
 with searchbox:
-    input = st.selectbox(
+    creature_search = st.selectbox(
         'Search for a creature',
         monsters.keys(), 
         index=None,
         placeholder="Search for a creature", 
         label_visibility="hidden",
-        on_change = display_result(input),
+        key="creature_search",
+        on_change = display_result,
     )
 
