@@ -17,7 +17,7 @@ searchbox = st.container()
 
 "---"
 stat_header = st.container(border=True)
-left, right = stat_header.columns([3,1])
+left, middle, right = stat_header.columns([2,1,1])
 
 def display_result():
     search = st.session_state.creature_search
@@ -26,10 +26,15 @@ def display_result():
         ac = monsters[search]['ac']
         with left:
             st.header(monsters[search]['name'], width="stretch")
+        with middle:
+            st.write(f"HP: {hp}")
+        with right:
+            st.write(f"AC: {ac}")
+            
+        with stat_header:
             type_alignment = f"{monsters[search]['size']} {monsters[search]['creatureType']}, {monsters[search]['alignment']}"
             st.write(type_alignment.title())
-            st.write(f"HP: {hp}")
-        with stat_header:
+            st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
             "---"
             with st.expander("Image"):
                 st.image(monsters[search]['imageUrl'])
@@ -46,10 +51,7 @@ def display_result():
                             else:
                                 st.write(f"{speed_type.title()}: {value} ft.")
                     else: st.write(f"Hover: {str(value).title()}")
-        with right:
-            " "
-            st.write(f"Challenge Rating: {monsters[search]['challenge']['rating']} ({monsters[search]['challenge']['xp']} XP)")
-            st.write(f"AC: {ac}")
+        
 
 with searchbox:
     creature_search = st.selectbox(
