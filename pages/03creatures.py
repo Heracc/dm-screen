@@ -54,7 +54,7 @@ def display_result():
 with searchbox:
     creature_search = st.selectbox(
         'Search for a creature',
-        monsters.keys(), 
+        monsters.keys().title(), 
         index=None,
         placeholder="Search for a creature", 
         label_visibility="hidden",
