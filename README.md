@@ -111,3 +111,29 @@ I used AI to help me with the SQL queries. I had to look up a lot of things to d
 * make creature names in the initiative board clickable and use st.page_link and st.query_parameters that sets the seach in the creature page to that creature
 * make it so that theres a button on the creature page to add the creature to initiative
 * make a button on player card to add to initiative?
+
+from chat: 
+``` py
+# Use columns for the header
+col1, col2, col3 = st.columns([2, 1, 1])
+with col1:
+    st.header(monsters[search]['name'])
+with col2:
+    st.write(f"AC {ac}")
+with col3:
+    st.write(f"HP {hp}")
+
+# Use a 6-column grid for ability scores
+ability_cols = st.columns(6)
+for i, (ability, score) in enumerate(monsters[search]['abilityScores'].items()):
+    with ability_cols[i]:
+        st.write(f"**{ability[:3].upper()}**")
+        st.write(f"{score}")
+
+# Use tabs for organization
+tab1, tab2, tab3 = st.tabs(["Stats", "Actions", "Traits"])
+with tab1:
+    # Stats content
+with tab2:
+    # Actions content
+```
