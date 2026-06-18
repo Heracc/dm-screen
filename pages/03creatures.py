@@ -47,7 +47,10 @@ def display_result():
                     if speed_type != "hover":
                         if value != 0:
                                 st.write(f"{speed_type.title()}: {value} ft.")
-                    else: st.write(f"Hover: {str(value).title()}")
+                    elif value == False: 
+                        pass
+                    else:
+                        st.write(f"Hover: {str(value).title()}")
         
 
 with searchbox:
