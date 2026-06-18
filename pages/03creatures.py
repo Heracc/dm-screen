@@ -45,10 +45,7 @@ def display_result():
                 " "
                 for speed_type, value in monsters[search]['speed'].items():
                     if speed_type != "hover":
-                        if value is not 0:
-                            if speed_type == "hover":
-                                pass
-                            else:
+                        if value != 0:
                                 st.write(f"{speed_type.title()}: {value} ft.")
                     else: st.write(f"Hover: {str(value).title()}")
         

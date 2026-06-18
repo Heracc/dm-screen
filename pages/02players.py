@@ -39,7 +39,7 @@ if "players" not in st.session_state:
     st.session_state.players = {}
     
 st.title("players")
-st.write("data frame will go here, i promise")
+header = st.container()
 
 try:
     with Session(engine) as connection:
@@ -129,8 +129,7 @@ if st.button("retrieve"):
         df.columns.values[8:20] = df.columns[8:20].str.upper()
         df.columns = df.columns.str.replace('MOD', 'Modifier')
         transposed_df = df.T
-        st.dataframe(df)
-    st.dataframe(transposed_df)
+    header.dataframe(transposed_df)
 
 
 with st.form("deleter", clear_on_submit=True):   
