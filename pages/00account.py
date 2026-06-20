@@ -53,6 +53,15 @@ def forgot_pswrd():
                 st.success("Password reset email sent! Check your inbox for the reset link.")
             except Exception as e:
                 st.error(f"Reset email failed: {e}")
+                
+                
+def otp_submit():
+    response = supabase.auth.verify_otp({
+    'email': f'{st.session_state.otp_username}@dmscreen.internal',
+    'token': f'{st.session_state.otp_code}',
+    'type': 'email',
+})                
+
 
 if st.session_state.user == None:
     header.write("Sign in to access player sheet storage. \n You can use the initiative tracker and creature stats without an account.")
@@ -69,7 +78,21 @@ if st.session_state.user == None:
             st.text_input("Password; minimum 6 characters", type="password", key="si_password_input")
             st.form_submit_button("Sign In", on_click=sign_in)
     if st.button("Forgot Password?"):
-        st.error("Password reset not made yet... sorry. WILSON lo siento")
+        email = st.text_input("Enter your email address to receive a password reset link.")
+        response = supabase.auth.sign_in_with_otp({
+            'email': 'f{email}',
+            'options': {
+            'should_create_user': False,
+            },
+        })
+        
+        st.write(response)
+        with st.form("otp_form"):
+            st.text_input("Enter the OTP code sent to your email", key="otp_code")
+            st.text_input("Enter username", key="otp_username")
+            st.form_submit_button("Submit OTP", on_click=otp_submit)
+        
+#        st.error("Password reset not made yet.")
 #        forgot_pswrd()
 else:
     st.write(f"Welcome back,{st.session_state.si_username_input}")
