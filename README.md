@@ -112,6 +112,8 @@ I used AI to help me with the SQL queries. I had to look up a lot of things to d
 * make it so that theres a button on the creature page to add the creature to initiative
 * make a button on player card to add to initiative?
 
+use data_editor for initiative
+
 from chat: 
 ``` py
 # Use columns for the header
