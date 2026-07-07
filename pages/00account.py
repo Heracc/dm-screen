@@ -95,6 +95,6 @@ if st.session_state.user == None:
 #        st.error("Password reset not made yet.")
 #        forgot_pswrd()
 else:
-    st.write(f"Welcome back,{st.session_state.si_username_input}")
+    st.write(f"Welcome back, {st.session_state.si_username_input}")
     st.button("Sign Out", on_click=sign_out)
     
