@@ -44,7 +44,7 @@ header = st.container()
 
 try:
     with Session(engine) as connection:
-        result = session.execute(text("SELECT 1")).scalar()
+        result = connection.execute(text("SELECT 1")).scalar()
         if result == 1:
             print("Connected to the database successfully.")
 except Exception as e:
