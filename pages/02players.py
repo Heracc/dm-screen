@@ -44,7 +44,9 @@ header = st.container()
 
 try:
     with Session(engine) as connection:
-        st.write("Connection successful!")
+        result = session.execute(text("SELECT 1")).scalar()
+        if result == 1:
+            print("Connected to the database successfully.")
 except Exception as e:
     st.write(f"Failed to connect: {e} \n Stopping app.")
     st.stop()
@@ -58,6 +60,7 @@ def add_player():
         "class": st.session_state.class_input,
         "subclass": st.session_state.subclass_input,
         "background": st.session_state.background_input,
+        "level": st.session_state.level_input,
         "languages": st.session_state.language_input,
         "hp": st.session_state.hp_input,
         "speed": st.session_state.speed_input,
@@ -76,6 +79,7 @@ def add_player():
             _class=player_input['class'],
             subclass=player_input['subclass'],
             background=player_input['background'],
+            level=player_input['level'],
             languages=player_input['languages'],
             hp=player_input['hp'], 
             ac=player_input['ac'],
@@ -98,7 +102,7 @@ with st.expander("Add a Player"):
         st.selectbox("Class", all_classes, placeholder="Class", index=None, accept_new_options=True, key="class_input")
         st.text_input("Subclass", placeholder="Subclass", key="subclass_input")
         st.text_input("Background", placeholder="Background", key="background_input")
-        st.space()
+        st.number_input("Level", placeholder="Level", min_value=1, max_value=20, step=1, key="level_input")
         st.number_input("Armor Class", placeholder="Armor Class", min_value=0, step=1, key="ac_input")
         st.number_input("HP Max", placeholder="HP Max", min_value=0, step=1, key="hp_input")
         st.number_input("Speed", placeholder="Speed", min_value=0, step=1, key="speed_input")
@@ -114,7 +118,7 @@ with st.expander("Add a Player"):
         st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=add_player)
 
-if st.button("retrieve"):
+if st.button("Retrieve Players"):
     with Session(engine) as session:
         # AI helped me write the syntax for this line of code. It creates a pandas dataframe object from the SQL result that is returned when you query the players table 
         # using the Supabase
@@ -132,17 +136,17 @@ if st.button("retrieve"):
         transposed_df = df.T
     header.dataframe(transposed_df)
 
+with st.expander("Delete a Player"):
+    with st.form("deleter", clear_on_submit=True):   
+        st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
+        confirm = st.checkbox("Are you sure?")
+        submit = st.form_submit_button("Delete Player")
+        
+        if submit and confirm:
+            with Session(engine) as session:
+                st.toast(f"Player {st.session_state.to_delete} deleted!")
 
-with st.form("deleter", clear_on_submit=True):   
-    st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
-    confirm = st.checkbox("Are you sure?")
-    submit = st.form_submit_button("Delete Player")
-    
-    if submit and confirm:
-        with Session(engine) as session:
-            st.toast(f"Player {st.session_state.to_delete} deleted!")
-
-            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == st.session_state.to_delete).first())
-            session.commit()
+                session.delete(session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == st.session_state.to_delete).first())
+                session.commit()
         
 

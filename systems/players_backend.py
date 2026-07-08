@@ -1,14 +1,13 @@
-from decouple import config
 import uuid
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON, Computed
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.pool import NullPool
 
-USER = config("DB_USER")
-PASSWORD = config("DB_PASSWORD")
-DBNAME = config("DB_NAME")
-PORT = config("DB_PORT")
-HOST = config("DB_HOST")
+USER = st.secrets["SUPABASE_USER"]
+PASSWORD = st.secrets["SUPABASE_PASSWORD"]
+DBNAME = st.secrets["SUPABASE_NAME"]
+PORT = st.secrets["SUPABASE_PORT"]
+HOST = st.secrets["SUPABASE_HOST"]
 
 DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
 
