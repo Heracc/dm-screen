@@ -31,7 +31,8 @@ all_languages = [
     "Thieves' Cant"
 ]
 
-if st.session_state.user == None:
+if st.session_state.user_id == None:
+    
     st.write("You need to sign in to access this page. Go to the profile page using the sidebar.")
     st.stop()
 
@@ -50,7 +51,7 @@ except Exception as e:
 
 def add_player():
     player_input = {
-        "user_id": st.session_state.user,
+        "user_id": st.session_state.user_id,
         "name": st.session_state.name_input,
         "ac": st.session_state.ac_input,
         "race": st.session_state.race_input,
@@ -117,7 +118,7 @@ if st.button("retrieve"):
     with Session(engine) as session:
         # AI helped me write the syntax for this line of code. It creates a pandas dataframe object from the SQL result that is returned when you query the players table 
         # using the Supabase
-        df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user).statement, session.connection())
+        df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user_id).statement, session.connection())
         df.drop(columns=['id', 'user_id'], inplace=True)
         #AI told me how to use the pandas rename
         df.rename(columns={'_class': 'Class'}, inplace=True)
@@ -141,7 +142,7 @@ with st.form("deleter", clear_on_submit=True):
         with Session(engine) as session:
             st.toast(f"Player {st.session_state.to_delete} deleted!")
 
-            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user, Players.name == st.session_state.to_delete).first())
+            session.delete(session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == st.session_state.to_delete).first())
             session.commit()
         
 
