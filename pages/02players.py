@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from systems.players_backend import Players, engine
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 all_classes = [
