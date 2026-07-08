@@ -1,13 +1,13 @@
-import uuid
+import uuid, os
 from sqlalchemy import create_engine, Column, Integer, Text, Uuid, JSON, Computed
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.pool import NullPool
 
-USER = st.secrets["SUPABASE_USER"]
-PASSWORD = st.secrets["SUPABASE_PASSWORD"]
-DBNAME = st.secrets["SUPABASE_NAME"]
-PORT = st.secrets["SUPABASE_PORT"]
-HOST = st.secrets["SUPABASE_HOST"]
+USER = os.environ.get("SUPABASE_USER")
+PASSWORD = os.environ.get("SUPABASE_PASSWORD")
+DBNAME = os.environ.get("SUPABASE_NAME")
+PORT = os.environ.get("SUPABASE_PORT")
+HOST = os.environ.get("SUPABASE_HOST")
 
 DATABASE_URL = f"postgresql+psycopg2://{USER}:{PASSWORD}@{HOST}:{PORT}/{DBNAME}?sslmode=require"
 
