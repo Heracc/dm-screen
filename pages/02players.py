@@ -153,7 +153,6 @@ with st.expander("Update a Player"):
     
     with Session(engine) as session:
         player_to_update = session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == to_update).first()
-        st.write(f"class: {player_to_update._class}")
         if player_to_update is not None:
             curr_stats = {
                 "name": player_to_update.name,
