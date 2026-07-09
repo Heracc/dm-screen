@@ -178,7 +178,7 @@ with st.expander("Update a Player"):
         with st.form("updater", clear_on_submit=True):
             st.text_input("Character Name", value=curr_stats["name"], placeholder="Character Name", key="name_update")
             st.text_input("Race", value=curr_stats["race"], placeholder="Race", key="race_update")
-            st.selectbox("Class", all_classes, index=class_index, placeholder="Class", index=None, accept_new_options=True, key="class_update")
+            st.selectbox("Class", all_classes, index=class_index, placeholder="Class", accept_new_options=True, key="class_update")
             st.text_input("Subclass", value=curr_stats["subclass"], placeholder="Subclass", key="subclass_update")
             st.text_input("Background", value=curr_stats["background"], placeholder="Background", key="background_update")
             st.number_input("Level", value=curr_stats["level"], placeholder="Level", min_value=1, max_value=20, step=1, key="level_update")
