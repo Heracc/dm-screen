@@ -141,7 +141,6 @@ with st.expander("Delete a Player"):
         st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
         confirm = st.checkbox("Are you sure?")
         submit = st.form_submit_button("Delete Player")
-        c
         if submit and confirm:
             with Session(engine) as session:
                 st.toast(f"Player {st.session_state.to_delete} deleted!")
@@ -175,25 +174,25 @@ with st.expander("Update a Player"):
                 "cha": player_to_update.cha
             }
             
-
-    with st.form("updater", clear_on_submit=True):
-        st.text_input("Character Name", value=curr_stats["name"], placeholder="Character Name", key="name_update")
-        st.text_input("Race", value=curr_stats["race"], placeholder="Race", key="race_update")
-        st.selectbox("Class", all_classes, value=curr_stats["class"], placeholder="Class", index=None, accept_new_options=True, key="class_update")
-        st.text_input("Subclass", value=curr_stats["subclass"], placeholder="Subclass", key="subclass_update")
-        st.text_input("Background", value=curr_stats["background"], placeholder="Background", key="background_update")
-        st.number_input("Level", value=curr_stats["level"], placeholder="Level", min_value=1, max_value=20, step=1, key="level_update")
-        st.number_input("Armor Class", value=curr_stats["ac"], placeholder="Armor Class", min_value=0, step=1, key="ac_update")
-        st.number_input("HP Max", value=curr_stats["hp"], placeholder="HP Max", min_value=0, step=1, key="hp_update")
-        st.number_input("Speed", value=curr_stats["speed"], placeholder="Speed", min_value=0, step=1, key="speed_update")
-        st.markdown("###### Ability Scores")
-        with st.container(horizontal=True):
-            st.number_input("STR", value=curr_stats["str"], placeholder="STR", min_value=3, max_value=30, step=1, width=200, key="strength_update")
-            st.number_input("DEX", value=curr_stats["dex"], placeholder="DEX", min_value=3, max_value=30, step=1, width=200, key="dex_update")
-            st.number_input("CON", value=curr_stats["con"], placeholder="CON", min_value=3, max_value=30, step=1, width=200, key="con_update")
-            st.number_input("INT", value=curr_stats["int"], placeholder="INT", min_value=3, max_value=30, step=1, width=200, key="int_update")
-            st.number_input("WIS", value=curr_stats["wis"], placeholder="WIS", min_value=3, max_value=30, step=1, width=200, key="wis_update")
-            st.number_input("CHA", value=curr_stats["cha"], placeholder="CHA", min_value=3, max_value=30, step=1, width=200, key="cha_update")
-        st.markdown("###### Languages")
-        st.multiselect("Select Languages:", all_languages, default=curr_stats["languages"] key="language_update")
-        st.form_submit_button('Update Character')
+    if player_to_update is not None:
+        with st.form("updater", clear_on_submit=True):
+            st.text_input("Character Name", value=curr_stats["name"], placeholder="Character Name", key="name_update")
+            st.text_input("Race", value=curr_stats["race"], placeholder="Race", key="race_update")
+            st.selectbox("Class", all_classes, value=curr_stats["class"], placeholder="Class", index=None, accept_new_options=True, key="class_update")
+            st.text_input("Subclass", value=curr_stats["subclass"], placeholder="Subclass", key="subclass_update")
+            st.text_input("Background", value=curr_stats["background"], placeholder="Background", key="background_update")
+            st.number_input("Level", value=curr_stats["level"], placeholder="Level", min_value=1, max_value=20, step=1, key="level_update")
+            st.number_input("Armor Class", value=curr_stats["ac"], placeholder="Armor Class", min_value=0, step=1, key="ac_update")
+            st.number_input("HP Max", value=curr_stats["hp"], placeholder="HP Max", min_value=0, step=1, key="hp_update")
+            st.number_input("Speed", value=curr_stats["speed"], placeholder="Speed", min_value=0, step=1, key="speed_update")
+            st.markdown("###### Ability Scores")
+            with st.container(horizontal=True):
+                st.number_input("STR", value=curr_stats["str"], placeholder="STR", min_value=3, max_value=30, step=1, width=200, key="strength_update")
+                st.number_input("DEX", value=curr_stats["dex"], placeholder="DEX", min_value=3, max_value=30, step=1, width=200, key="dex_update")
+                st.number_input("CON", value=curr_stats["con"], placeholder="CON", min_value=3, max_value=30, step=1, width=200, key="con_update")
+                st.number_input("INT", value=curr_stats["int"], placeholder="INT", min_value=3, max_value=30, step=1, width=200, key="int_update")
+                st.number_input("WIS", value=curr_stats["wis"], placeholder="WIS", min_value=3, max_value=30, step=1, width=200, key="wis_update")
+                st.number_input("CHA", value=curr_stats["cha"], placeholder="CHA", min_value=3, max_value=30, step=1, width=200, key="cha_update")
+            st.markdown("###### Languages")
+            st.multiselect("Select Languages:", all_languages, default=curr_stats["languages"], key="language_update")
+            st.form_submit_button('Update Character')
