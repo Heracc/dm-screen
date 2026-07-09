@@ -149,6 +149,7 @@ with st.expander("Delete a Player"):
                 session.commit()
         
 with st.expander("Update a Player"):
+    st.write("functionality not yet implemented")
     to_update = st.text_input("Update a player", placeholder="Type name here...", key="to_update")
     
     with Session(engine) as session:
