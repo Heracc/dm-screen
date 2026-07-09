@@ -40,7 +40,7 @@ if st.session_state.user_id == None:
 if "players" not in st.session_state:
     st.session_state.players = {}
     
-st.title("players")
+st.title("Players")
 header = st.container()
 
 try:
@@ -95,6 +95,23 @@ def add_player():
         session.add(new_player)
         session.commit()
 
+if st.button("Retrieve Players"):
+    with Session(engine) as session:
+        # AI helped me write the syntax for this line of code. It creates a pandas dataframe object from the SQL result that is returned when you query the players table 
+        # using the Supabase
+        df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user_id).statement, session.connection())
+        df.drop(columns=['id', 'user_id'], inplace=True)
+        #AI told me how to use the pandas rename
+        df.rename(columns={'_class': 'Class'}, inplace=True)
+        df.columns = df.columns.str.title()
+        df.set_index("Name", inplace=True)
+        # AI told me how to replace _ with spaces
+        df.columns = df.columns.str.replace('_', ' ')
+        df.columns.values[5:7] = df.columns[5:7].str.upper()
+        df.columns.values[8:20] = df.columns[8:20].str.upper()
+        df.columns = df.columns.str.replace('MOD', 'Modifier')
+        transposed_df = df.T
+    header.dataframe(transposed_df)
 
 with st.expander("Add a Player"):
     with st.form("add_player", clear_on_submit=True, enter_to_submit=False):
@@ -119,24 +136,6 @@ with st.expander("Add a Player"):
         st.multiselect("Select Languages:", all_languages, key="language_input")
         st.form_submit_button('Add Character', on_click=add_player)
 
-if st.button("Retrieve Players"):
-    with Session(engine) as session:
-        # AI helped me write the syntax for this line of code. It creates a pandas dataframe object from the SQL result that is returned when you query the players table 
-        # using the Supabase
-        df = pd.read_sql_query(session.query(Players).filter(Players.user_id == st.session_state.user_id).statement, session.connection())
-        df.drop(columns=['id', 'user_id'], inplace=True)
-        #AI told me how to use the pandas rename
-        df.rename(columns={'_class': 'Class'}, inplace=True)
-        df.columns = df.columns.str.title()
-        df.set_index("Name", inplace=True)
-        # AI told me how to replace _ with spaces
-        df.columns = df.columns.str.replace('_', ' ')
-        df.columns.values[5:7] = df.columns[5:7].str.upper()
-        df.columns.values[8:20] = df.columns[8:20].str.upper()
-        df.columns = df.columns.str.replace('MOD', 'Modifier')
-        transposed_df = df.T
-    header.dataframe(transposed_df)
-
 with st.expander("Delete a Player"):
     with st.form("deleter", clear_on_submit=True):   
         st.text_input("Delete a player", placeholder="Type name here...", key="to_delete")
@@ -150,4 +149,26 @@ with st.expander("Delete a Player"):
                 session.delete(session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == st.session_state.to_delete).first())
                 session.commit()
         
-
+with st.expander("Update a Player"):
+    to_update = st.text_input("Update a player", placeholder="Type name here...", key="to_update")
+    with st.form("updater", clear_on_submit=True):
+        st.text_input("Character Name", placeholder="Character Name", key="name_update")
+        st.text_input("Race", placeholder="Race", key="race_update")
+        st.selectbox("Class", all_classes, placeholder="Class", index=None, accept_new_options=True, key="class_update")
+        st.text_input("Subclass", placeholder="Subclass", key="subclass_update")
+        st.text_input("Background", placeholder="Background", key="background_update")
+        st.number_input("Level", placeholder="Level", min_value=1, max_value=20, step=1, key="level_update")
+        st.number_input("Armor Class", placeholder="Armor Class", min_value=0, step=1, key="ac_update")
+        st.number_input("HP Max", placeholder="HP Max", min_value=0, step=1, key="hp_update")
+        st.number_input("Speed", placeholder="Speed", min_value=0, step=1, key="speed_update")
+        st.markdown("###### Ability Scores")
+        with st.container(horizontal=True):
+            st.number_input("STR", placeholder="STR", min_value=3, max_value=30, step=1, width=200, key="strength_update")
+            st.number_input("DEX", placeholder="DEX", min_value=3, max_value=30, step=1, width=200, key="dex_update")
+            st.number_input("CON", placeholder="CON", min_value=3, max_value=30, step=1, width=200, key="con_update")
+            st.number_input("INT", placeholder="INT", min_value=3, max_value=30, step=1, width=200, key="int_update")
+            st.number_input("WIS", placeholder="WIS", min_value=3, max_value=30, step=1, width=200, key="wis_update")
+            st.number_input("CHA", placeholder="CHA", min_value=3, max_value=30, step=1, width=200, key="cha_update")
+        st.markdown("###### Languages")
+        st.multiselect("Select Languages:", all_languages, key="language_update")
+        st.form_submit_button('Update Character')
