@@ -152,9 +152,10 @@ with st.expander("Delete a Player"):
 with st.expander("Update a Player"):
     to_update = st.text_input("Update a player", placeholder="Type name here...", key="to_update")
     
-#    with Session(engine) as session:
-  #      player_to_update = session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == to_update).first()
-        
+    with Session(engine) as session:
+        player_to_update = session.query(Players).filter(Players.user_id == st.session_state.user_id, Players.name == to_update).first()
+        st.write(f"response: {player_to_update}")
+        st.write(f"class: {player_to_update._class}")
 
     with st.form("updater", clear_on_submit=True):
         st.text_input("Character Name", placeholder="Character Name", key="name_update")
