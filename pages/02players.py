@@ -197,3 +197,16 @@ with st.expander("Update a Player"):
             st.markdown("###### Languages")
             st.multiselect("Select Languages:", all_languages, default=curr_stats["languages"], key="language_update")
             st.form_submit_button('Update Character')
+            
+# how to edit row: https://docs.sqlalchemy.org/en/20/tutorial/data_update.html#the-update-sql-expression-construct
+# put multiple thingsd in single update to update everythgibng at oince.
+# stmt = (
+#    update(user_table)
+#    .where(user_table.c.name == "patrick")
+#    .values(
+    #   {
+    #    fullname="Patrick the Star"
+    #    favorite_color="pink"
+    #   }
+    # )
+# )
